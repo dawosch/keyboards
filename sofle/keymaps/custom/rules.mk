@@ -1,0 +1,6 @@
+LTO_ENABLE = yes
+ENCODER_ENABLE = yes
+OLED_ENABLE = yes
+RGB_MATRIX_ENABLE = yes
+
+RAW_ENABLE = yes
