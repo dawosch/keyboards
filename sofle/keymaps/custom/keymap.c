@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "keymap_german.h"
 #include "sendstring_german.h"
+#include "raw_hid.h"
 
 #include QMK_KEYBOARD_H
 
@@ -174,6 +175,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     msg[1] = record->event.key.col;
     msg[2] = record->event.key.row;
     msg[3] = record->event.pressed;
+    msg[4] = (uint8_t) 1337;
     raw_hid_send(msg, 32);
     return true;
 };
