@@ -33,8 +33,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
     * | Shift |   Y   |   X   |   C   |   V   |   B   |  MUTE |    |       |   N   |   M   |   ,   |   .   |   /   |   ß   |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |  WIN  |  ALT  |  CTL  |  NUM  | Space |    | Enter | SYMBL |  CTL  | ALTGR | SETTI |
-    *                 |       |       |       |       |       /    \       |       |       |       |       |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | SYMBL | ALTGR |       | SETTI |
+    *                 |       |       |       |       |  CTL  /    \  L3   |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
     [_QWERTZ] = LAYOUT(
@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         KC_LSFT, DE_Y,  DE_X,   DE_C,    DE_V,   DE_B,  KC_MUTE,     KC_NO,    DE_N,  DE_M,  DE_COMM, DE_DOT, DE_SLSH, DE_SS,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-                    KC_LGUI, KC_LALT, KC_LCTL, MO(2), LCTL_T(KC_SPC), LT(3,KC_ENT), LT(1,KC_SPC), KC_RCTL, KC_RALT, MO(4)
+                      KC_NO, KC_LGUI, KC_LALT, MO(2), LCTL_T(KC_SPC), LT(3,KC_ENT), LT(1,KC_SPC), KC_RALT, KC_NO, MO(4)
     //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
     ),
 
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
     * | Shift |   ^   |   /   |   *   |   \   |       |  MUTE |    |       |   ~   |   $   |   {   |   }   |   @   |       |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |  WIN  |  ALT  |  CTL  |  NUM  | Space |    | Enter | ARROW |  CTL  | ALTGR | Bspc  |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | ARROW | ALTGR |       | SETTI |
     *                 |       |       |       |       |       /    \       |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
     * | Shift |       |       |       |       |       |  MUTE |    |       |   0   |   1   |   2   |   3   |       |       |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |  WIN  |  ALT  |  CTL  |  NUM  | Space |    | Enter | ARROW |  CTL  | ALTGR | Bspc  |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | ARROW | ALTGR |       | Bspc  |
     *                 |       |       |       |       |       /    \       |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
@@ -114,13 +114,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * .-----------------------------------------------.                    .-----------------------------------------------.
     * |   ^   |       |       |       |       |       |                    |       |       |       |       |       | Bspc  |
     * |-------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+-------|
-    * |  Esc  |       |       |       |       |       |                    |       |   7   |   8   |   9   |       |       |
+    * |  Esc  |       |       |       |       |       |                    |       |       |       |       |       |       |
     * |-------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+-------|
-    * |  Tab  |       |       |       |       |       |                    |       |   4   |   5   |   6   |       |       |
+    * |  Tab  |       |       |       |       |       |                    |  LFT  |   UP  |  DWN  |  RGHT |       |       |
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
-    * | Shift |       |       |       |       |       |  MUTE |    |       |   0   |   1   |   2   |   3   |       |       |
+    * | Shift |       |       |       |       |       |  MUTE |    |       |       |       |       |       |       |       |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |  WIN  |  ALT  |  CTL  |  NUM  | Space |    | Enter | ARROW |  CTL  | ALTGR | Bspc  |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | ARROW | ALTGR |       | Bspc  |
     *                 |       |       |       |       |       /    \       |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
@@ -128,9 +128,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //,------------------------------------------------.                    ,---------------------------------------------------.
         KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_TRNS,
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_NO,   KC_UP,   KC_NO,   KC_NO,  KC_NO,
+        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,  KC_NO,
+        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_LEFT,   KC_UP, KC_DOWN, KC_RIGHT, KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         KC_LSFT, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, KC_TRNS,     KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
@@ -143,11 +143,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * .-----------------------------------------------.                    .-----------------------------------------------.
     * |  RST  |       |       |       |       | EECLR |                    |       |       |       |       |       | Bspc  |
     * |-------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+-------|
-    * |  Esc  |       |       |       |       |       |                    |       |   7   |   8   |   9   |       |       |
+    * |  Esc  |       |       |       |       |       |                    |       |       |       |       |       |       |
     * |-------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+-------|
-    * |       |       |       |       |       |       |                    |       |   4   |   5   |   6   |       |       |
+    * |       |       |       |       |       |       |                    |       |       |       |       |       |       |
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
-    * |       |       |       |       |       |       |  MUTE |    |       |   0   |   1   |   2   |   3   |       |       |
+    * |       |       |       |       |       |       |  MUTE |    |       |       |       |       |       |       |       |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
     *                 |       |       |       |       | Space |    | Enter | RGB_T | RGB_U | RGB_D |       |
     *                 |       |       |       |       |       /    \       |       |       |       |       |
@@ -155,11 +155,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
     [_SETTINGS] = LAYOUT(
     //,------------------------------------------------.                    ,---------------------------------------------------.
-        QK_BOOT, KC_NO,  KC_NO,  KC_NO,  KC_NO,  EE_CLR,                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_TRNS,
+        QK_BOOT, KC_NO,  KC_NO,  KC_NO,  KC_NO,  EE_CLR,                    RGB_HUI, RGB_SAI, RGB_VAI, KC_NO, KC_NO,  KC_TRNS,
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_NO,   KC_UP,   KC_NO,   KC_NO,  KC_NO,
+        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     RGB_HUD, RGB_SAD, RGB_VAD, KC_NO, KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        KC_NO, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,  KC_NO,
+        KC_NO, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                       KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         KC_NO, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, KC_TRNS,     KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
@@ -168,14 +168,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     uint8_t msg[32];
     memset(msg, 0, 32);
-    msg[0] = keycode;
+    msg[0] = record->event.key.row;
     msg[1] = record->event.key.col;
-    msg[2] = record->event.key.row;
-    msg[3] = record->event.pressed;
-    msg[4] = (uint8_t) 1337;
+    msg[2] = record->event.pressed;
     raw_hid_send(msg, 32);
     return true;
 };
@@ -256,6 +255,40 @@ bool oled_task_user(void) {
     } else {
         render_logo();
     }
+    return false;
+}
+
+#endif
+
+#ifdef RGB_MATRIX_ENABLE
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    switch (get_highest_layer(layer_state)) {
+        case _QWERTZ:
+            rgb_matrix_set_color(0, 5, 40, 5);
+            rgb_matrix_set_color(36, 5, 40, 5);
+            break;
+        case _SYMBOLS:
+            rgb_matrix_set_color(0, 5, 75, 90);
+            rgb_matrix_set_color(36, 5, 75, 90);
+            break;
+        case _NUMPAD:
+            rgb_matrix_set_color(0, 90, 45, 5);
+            rgb_matrix_set_color(36, 90, 45, 5);
+            break;
+        case _ARROWS:
+            rgb_matrix_set_color(0, 85, 90, 5);
+            rgb_matrix_set_color(36, 85, 90, 5);
+            break;
+        case _SETTINGS:
+            rgb_matrix_set_color(0, 60, 5, 90);
+            rgb_matrix_set_color(36, 60, 5, 90);
+            break;
+        default:
+            rgb_matrix_set_color(0, 90, 10, 10);
+            rgb_matrix_set_color(36, 90, 10, 10);
+    }
+
     return false;
 }
 
