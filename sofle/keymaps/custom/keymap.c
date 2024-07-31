@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         KC_LSFT, DE_Y,  DE_X,   DE_C,    DE_V,   DE_B,  KC_MUTE,     KC_NO,    DE_N,  DE_M,  DE_COMM, DE_DOT, DE_SLSH, DE_SS,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-                    KC_NO, KC_LGUI, KC_LALT, MO(2), LCTL_T(KC_SPC), LT(3,KC_ENT), LT(1,KC_SPC), KC_RALT, KC_NO, MO(4)
+                    KC_NO, KC_LGUI, KC_LALT, MO(2), LCTL_T(KC_SPC), LT(3,KC_ENT), MO(1), KC_RALT, KC_NO, MO(4)
     //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
     ),
 
@@ -95,6 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                 |       |       |       |       |       /    \       |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
+
     [_NUMPAD] = LAYOUT(
     //,------------------------------------------------.                    ,---------------------------------------------------.
         KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_TRNS,
