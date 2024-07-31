@@ -25,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
     * QWERTZ
     * .-----------------------------------------------.                    .-----------------------------------------------.
-    * |   ^   |   1   |   2   |   3   |   4   |   5   |                    |   6   |   7   |   8   |   9   |   0   | Bspc  |
+    * |   ^   | (F)1  | (F)2  | (F)3  | (F)4  | (F)5  |                    | (F)6  | (F)7  | (F)8  | (F)9  | (F1)0 | BSPC/F12 |
     * |-------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+-------|
     * |  Esc  |   Q   |   W   |   E   |   R   |   T   |                    |   Z   |   U   |   I   |   O   |   P   |   Ü   |
     * |-------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+-------|
@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
     [_QWERTZ] = LAYOUT(
     //,------------------------------------------------.                    ,---------------------------------------------------.
-        DE_GRV,  DE_1,   DE_2,   DE_3,   DE_4,   DE_5,                         DE_6,  DE_7,   DE_8,   DE_9,   DE_0,  KC_BSPC,
+        DE_GRV, LT(0,DE_1), LT(0,DE_2), LT(0,DE_3), LT(0,DE_4), LT(0,DE_5), LT(0,DE_6), LT(0,DE_7), LT(0,DE_8), LT(0,DE_9), LT(0,DE_0), LT(0,KC_BSPC),
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
         KC_ESC, DE_Q,   DE_W,   DE_E,    DE_R,   DE_T,                         DE_Z,  DE_U,   DE_I,   DE_O,   DE_P,  DE_UDIA,
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         KC_LSFT, DE_Y,  DE_X,   DE_C,    DE_V,   DE_B,  KC_MUTE,     KC_NO,    DE_N,  DE_M,  DE_COMM, DE_DOT, DE_SLSH, DE_SS,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-                      KC_NO, KC_LGUI, KC_LALT, MO(2), LCTL_T(KC_SPC), LT(3,KC_ENT), LT(1,KC_SPC), KC_RALT, KC_NO, MO(4)
+                    KC_NO, KC_LGUI, KC_LALT, MO(2), LCTL_T(KC_SPC), LT(3,KC_ENT), LT(1,KC_SPC), KC_RALT, KC_NO, MO(4)
     //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
     ),
 
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
     * | Shift |   ^   |   /   |   *   |   \   |       |  MUTE |    |       |   ~   |   $   |   {   |   }   |   @   |       |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | ARROW | ALTGR |       | SETTI |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | SYMBL | ALTGR |       | SETTI |
     *                 |       |       |       |       |       /    \       |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
     * | Shift |       |       |       |       |       |  MUTE |    |       |   0   |   1   |   2   |   3   |       |       |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | ARROW | ALTGR |       | Bspc  |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | SYMBL | ALTGR |       | Bspc  |
     *                 |       |       |       |       |       /    \       |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
     * | Shift |       |       |       |       |       |  MUTE |    |       |       |       |       |       |       |       |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | ARROW | ALTGR |       | Bspc  |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | SYMBL | ALTGR |       | Bspc  |
     *                 |       |       |       |       |       /    \       |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
@@ -176,6 +176,82 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     msg[1] = record->event.key.col;
     msg[2] = record->event.pressed;
     raw_hid_send(msg, 32);
+    
+
+    switch (keycode) {
+        case LT(0, DE_1):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F1);
+                return false;
+            }
+            return true;
+        case LT(0, DE_2):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F2);
+                return false;
+            }
+            return true;
+        case LT(0, DE_3):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F3);
+                return false;
+            }
+            return true;
+        case LT(0, DE_4):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F4);
+                return false;
+            }
+            return true;
+        case LT(0, DE_5):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F5);
+                return false;
+            }
+            return true;
+        case LT(0, DE_6):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F6);
+                return false;
+            }
+            return true;
+        case LT(0, DE_7):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F7);
+                return false;
+            }
+            return true;
+        case LT(0, DE_8):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F8);
+                return false;
+            }
+            return true;
+        case LT(0, DE_9):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F9);
+                return false;
+            }
+            return true;
+        case LT(0, DE_0):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F10);
+                return false;
+            }
+            return true;
+        // case LT(0, DE_11): <--- Define key
+        //     if (!record->tap.count && record->event.pressed) {
+        //         tap_code16(KC_F1);
+        //         return false;
+        //     }
+        //     return true;
+        case LT(0, KC_BSPC):
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(KC_F12);
+                return false;
+            }
+            return true;
+    }
     return true;
 };
 
