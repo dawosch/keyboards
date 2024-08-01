@@ -8,6 +8,7 @@
 #include "keymap_german.h"
 #include "sendstring_german.h"
 #include "raw_hid.h"
+#include "color.h"
 
 #include QMK_KEYBOARD_H
 
@@ -33,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|-------.    .-------|-------+-------+-------+-------+-------+-------|
     * | Shift |   Y   |   X   |   C   |   V   |   B   |  MUTE |    |       |   N   |   M   |   ,   |   .   |   /   |   ß   |
     * '-----------------------------------------------|-------|    |-------|-----------------------------------------------'
-    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | SYMBL | ALTGR |       | SETTI |
+    *                 |       |  WIN  |  ALT  |  NUM  | Space |    | Enter | SYMBL |  NUM  | ALTGR | SETTI |
     *                 |       |       |       |       |  CTL  /    \  L3   |       |       |       |       |
     *                 \--------------------------------------/      \--------------------------------------/
     */
@@ -47,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         KC_LSFT, DE_Y,  DE_X,   DE_C,    DE_V,   DE_B,  KC_MUTE,     KC_NO,    DE_N,  DE_M,  DE_COMM, DE_DOT, DE_SLSH, DE_SS,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-                    KC_NO, KC_LGUI, KC_LALT, MO(2), LCTL_T(KC_SPC), LT(3,KC_ENT), MO(1), KC_RALT, KC_NO, MO(4)
+                    KC_NO, KC_LGUI, KC_LALT, MO(2), LCTL_T(KC_SPC), KC_ENT, MO(1), MO(3), KC_RALT, MO(4)
     //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
     ),
 
@@ -131,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
         KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_LEFT,   KC_UP, KC_DOWN, KC_RIGHT, KC_NO,  KC_NO,
+        KC_TRNS, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_LEFT, KC_UP,   KC_DOWN, KC_RIGHT, KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         KC_LSFT, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, KC_TRNS,     KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,
     //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
@@ -339,7 +340,11 @@ bool oled_task_user(void) {
 
 #ifdef RGB_MATRIX_ENABLE
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+bool rgb_matrix_indicators_kb(void) {
+    if (!rgb_matrix_indicators_user()) {
+        return false;
+    }
+
     switch (get_highest_layer(layer_state)) {
         case _QWERTZ:
             rgb_matrix_set_color(0, 5, 40, 5);
@@ -365,6 +370,40 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             rgb_matrix_set_color(0, 90, 10, 10);
             rgb_matrix_set_color(36, 90, 10, 10);
     }
+    return true;
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    HSV hsv = (HSV){ 130, 90, 65 };
+
+    switch (get_highest_layer(layer_state)) {
+        case _QWERTZ:
+            hsv = (HSV){ 0, 0, 50 };
+            break;
+        case _SYMBOLS:
+            hsv = (HSV){ 0, 90, 50 };
+            break;
+        case _NUMPAD:
+            hsv = (HSV){ 210, 90, 50 };
+            break;
+        case _ARROWS:
+            hsv = (HSV){ 35, 90, 50 };
+            break;
+        case _SETTINGS:
+            hsv = (HSV){ 60, 90, 50 };
+            break;
+        default:
+            hsv = (HSV){ 0, 90, 50 };
+            break;
+    }
+
+    if (hsv.v > rgb_matrix_get_val()) {
+        hsv.v = rgb_matrix_get_val();
+    }
+
+    RGB rgb = hsv_to_rgb(hsv);
+    rgb_matrix_set_color(0, rgb.r, rgb.g, rgb.b);
+    rgb_matrix_set_color(36, rgb.r, rgb.g, rgb.b);
 
     return false;
 }
