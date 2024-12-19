@@ -1,8 +1,7 @@
 #include QMK_KEYBOARD_H
-#include <stdio.h>
-#include "color.h"
 #include "keymap_german.h"
 #include "sendstring_german.h"
+#include "color.h"
 #include "raw_hid.h"
 
 enum sofle_layers {
@@ -20,7 +19,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB, DE_Z, DE_Y, DE_U, DE_A, DE_Q,                               DE_P, DE_B, DE_M, DE_L, DE_F, DE_J,
         KC_LSFT, DE_C, DE_S, DE_I, DE_E, DE_O,                              DE_D, DE_T, DE_N, DE_R, DE_H, DE_SS,
         KC_LCTL, DE_V, DE_X, DE_UDIA, DE_ADIA, DE_ODIA, KC_MUTE,    DF(_QWERTZ), DE_W, DE_G, DE_COMM, DE_DOT, DE_K, DE_GRV,
-        MO(_FKEYS), MO(_NUMPAD), KC_LGUI, KC_LALT, LT(_SYMBOLS, KC_SPC),    KC_ENT, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT),
+        KC_LALT, KC_LGUI, MO(_FKEYS), MO(_NUMPAD), LT(_SYMBOLS, KC_SPC),    KC_ENT, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT),
 
     [_QWERTZ] = LAYOUT(
         LT(_SETUP, KC_ESC), DE_1, DE_2, DE_3, DE_4, DE_5,                   DE_6, DE_7, DE_8, DE_9, DE_0, KC_BSPC,
@@ -31,9 +30,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SYMBOLS] = LAYOUT(
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                           KC_HOME, KC_PGUP, KC_PGDN, KC_END, KC_NO, KC_TRNS,
-        KC_TRNS, DE_QUOT, KC_LT, KC_GT, DE_DQUO, DE_DOT,                      DE_AMPR, KC_NO, DE_LBRC, DE_RBRC, DE_PERC, KC_NO,
+        KC_TRNS, DE_QUOT, DE_LABK, DE_RABK, DE_DQUO, DE_DOT,                      DE_AMPR, KC_NO, DE_LBRC, DE_RBRC, DE_PERC, KC_NO,
         KC_TRNS, DE_EXLM, KC_PMNS, KC_PPLS, DE_EQL, KC_NUHS,                  DE_PIPE, DE_COLN, DE_LPRN, DE_RPRN, DE_QUES, KC_NO,
-        KC_TRNS, KC_CIRC, DE_SLSH, DE_ASTR, KC_BSLS, KC_NO, KC_NO,    KC_NO, DE_TILD, DE_DLR, DE_LCBR, DE_RCBR, KC_AT, KC_NO,
+        KC_TRNS, DE_CIRC, DE_SLSH, DE_ASTR, KC_BSLS, KC_NO, KC_NO,    KC_NO, DE_TILD, DE_DLR, DE_LCBR, DE_RCBR, KC_AT, KC_NO,
                       KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS,            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
     [_NUMPAD] = LAYOUT(
@@ -58,17 +57,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO)
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     uint8_t msg[32];
     memset(msg, 0, 32);
     msg[0] = record->event.key.col;
     msg[1] = record->event.key.row;
     msg[2] = record->event.pressed;
-    msg[3] = keycode >> 8;
-    msg[4] = keycode & 0xff;
+    msg[3] = get_highest_layer(default_layer_state);
+    msg[4] = get_highest_layer(layer_state);
+    // msg[5] = keycode >> 8;
+    // msg[6] = keycode & 0xff;
     raw_hid_send(msg, 32);
-    return true;
-};
+}
 
 #ifdef ENCODER_ENABLE
 
