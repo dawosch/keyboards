@@ -31,8 +31,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SYMBOLS] = LAYOUT(
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                               KC_HOME, KC_PGUP, KC_PGDN, KC_END, KC_NO, KC_TRNS,
         KC_TRNS, DE_QUOT, DE_AMPR, KC_NO, DE_DQUO, DE_DOT,                    DE_LABK, DE_LPRN, DE_LBRC, DE_LCBR, DE_PERC, KC_NO,
-        KC_TRNS, DE_EXLM, KC_PMNS, KC_PPLS, DE_EQL, KC_NUHS,                    DE_RABK, DE_RPRN, DE_RBRC, DE_RCBR, DE_QUES, KC_NO,
-        KC_TRNS, DE_CIRC, DE_SLSH, DE_ASTR, KC_BSLS, KC_NO, KC_NO,          KC_NO, DE_TILD, DE_DLR, DE_PIPE, KC_NO, KC_AT, KC_NO,
+        KC_TRNS, DE_EXLM, KC_PMNS, KC_PPLS, DE_EQL, DE_HASH,                    DE_RABK, DE_RPRN, DE_RBRC, DE_RCBR, DE_QUES, KC_NO,
+        KC_TRNS, DE_CIRC, DE_SLSH, DE_ASTR, KC_BSLS, KC_NO, KC_NO,          KC_NO, DE_TILD, DE_DLR, DE_PIPE, KC_NO, DE_AT, KC_NO,
                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
     [_NUMPAD] = LAYOUT(
