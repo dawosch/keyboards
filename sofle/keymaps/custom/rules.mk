@@ -4,3 +4,4 @@ OLED_ENABLE = yes
 RGB_MATRIX_ENABLE = yes
 VIA_ENABLE = yes
 RAW_ENABLE = yes
+WPM_ENABLE = yes
