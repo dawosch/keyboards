@@ -104,6 +104,9 @@ static void print_status_narrow(void) {
         case _QWRTZ:
             oled_write(PSTR("QWRTZ\n"), false);
             break;
+        case _STP:
+            oled_write(PSTR("SETUP\n"), false);
+            break;
         default:
             oled_write(PSTR("UNDEF\n"), false);
     }
@@ -124,9 +127,6 @@ static void print_status_narrow(void) {
             break;
         case _NVGTN:
             oled_write_P(PSTR("Nvgtn\n"), false);
-            break;
-        case _STP:
-            oled_write_P(PSTR("Setup\n"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
