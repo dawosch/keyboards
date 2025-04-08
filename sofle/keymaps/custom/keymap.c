@@ -18,19 +18,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC, DE_1, DE_2, DE_3, DE_4, DE_5,                                           DE_6, DE_7, DE_8, DE_9, DE_0, KC_BSPC,
         KC_TAB, DE_W, DE_L, DE_Y, DE_P, DE_B,                                           DE_Z, DE_F, DE_O, DE_U, DE_ODIA, DE_ADIA,
         KC_LSFT, DE_C, DE_R, DE_S, DE_T, DE_G,                                          DE_M, DE_N, DE_E, DE_I, DE_A, DE_UDIA,
-        KC_LCTL, DE_Q, DE_J, DE_V, DE_D, DE_K, DF(_STP),                            DF(_QWRTZ), DE_X, DE_H, DE_SS, DE_COMM, DE_DOT, KC_RSFT,
+        KC_LCTL, DE_Q, DE_J, DE_V, DE_D, DE_K, TG(_STP),                            DF(_QWRTZ), DE_X, DE_H, DE_SS, DE_COMM, DE_DOT, KC_RSFT,
                 KC_LALT, KC_LGUI, MO(_NVGTN), MO(_NMPD), LCTL_T(KC_SPC),            KC_ENT, MO(_SYMBLS), KC_NO, KC_NO, KC_NO),
 
     [_QWRTZ] = LAYOUT(
         KC_ESC, DE_1, DE_2, DE_3, DE_4, DE_5,                                           DE_6, DE_7, DE_8, DE_9, DE_0, KC_BSPC,
         KC_TAB, DE_Q, DE_W, DE_E, DE_R, DE_T,                                           DE_Z, DE_U, DE_I, DE_O, DE_P, DE_UDIA,
         KC_LSFT, DE_A, DE_S, DE_D, DE_F, DE_G,                                          DE_H, DE_J, DE_K, DE_L, DE_ODIA, DE_ADIA,
-        KC_LCTL, DE_Y, DE_X, DE_C, DE_V, DE_B, DF(_STP),                            DF(_CNRY), DE_N, DE_M, DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
+        KC_LCTL, DE_Y, DE_X, DE_C, DE_V, DE_B, TG(_STP),                            DF(_CNRY), DE_N, DE_M, DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
                 KC_LALT, KC_LGUI, MO(_NVGTN), MO(_NMPD), LCTL_T(KC_SPC),            KC_ENT, MO(_SYMBLS), KC_NO, KC_NO, KC_NO),
 
     [_SYMBLS] = LAYOUT(
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_HOME, KC_PGUP, KC_PGDN, KC_END, KC_NO, KC_TRNS,
-        KC_TRNS, DE_QUOT, DE_AMPR, KC_NO, DE_DQUO, DE_DOT,                              DE_LABK, DE_LPRN, DE_LBRC, DE_LCBR, DE_PERC, KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_NO, KC_HOME, KC_PGUP, KC_PGDN, KC_END, KC_TRNS,
+        KC_TRNS, DE_DQUO, DE_AMPR, DE_SCLN, DE_QUOT, DE_COLN,                           DE_LABK, DE_LPRN, DE_LBRC, DE_LCBR, DE_PERC, KC_NO,
         KC_TRNS, DE_EXLM, KC_PMNS, KC_PPLS, DE_EQL, KC_NUHS,                            DE_RABK, DE_RPRN, DE_RBRC, DE_RCBR, DE_QUES, KC_NO,
         KC_TRNS, DE_CIRC, DE_SLSH, DE_ASTR, KC_BSLS, KC_NO, KC_NO,                  KC_NO, DE_TILD, DE_DLR, DE_PIPE, DE_GRV, KC_AT, KC_NO,
                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_TOG,
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       RGB_HUD, RGB_HUI, KC_NO, KC_NO, RGB_RMOD, RGB_MOD,
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       RGB_SAD, RGB_SAI, KC_NO, KC_NO, RGB_SPD, RGB_SPI,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                            DF(_CNRY), RGB_VAD, RGB_VAI, KC_NO, KC_NO, KC_NO, KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, TG(_STP),                         KC_NO, RGB_VAD, RGB_VAI, KC_NO, KC_NO, KC_NO, KC_NO,
                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 };
 
@@ -93,52 +93,53 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    return OLED_ROTATION_270;
+    return OLED_ROTATION_0;
 };
 
-static void print_status_narrow(void) {
+static void print_layer(void) {
     switch (get_highest_layer(default_layer_state)) {
         case _CNRY:
-            oled_write(PSTR("CNRY\n"), false);
+            oled_write_ln_P(PSTR("CANARY"), false);
             break;
         case _QWRTZ:
-            oled_write(PSTR("QWRTZ\n"), false);
-            break;
-        case _STP:
-            oled_write(PSTR("SETUP\n"), false);
+            oled_write_ln_P(PSTR("QWERTZ"), false);
             break;
         default:
-            oled_write(PSTR("UNDEF\n"), false);
+            oled_write_ln_P(PSTR("???"), false);
+            break;
     }
-    oled_write_P(PSTR("-----"), false);
-    oled_write_P(PSTR("\n\n"), false);
 
-    oled_write_ln_P(PSTR("LAYER"), false);
+    oled_write_ln_P(PSTR("-----"), false);
+
     switch (get_highest_layer(layer_state)) {
         case _CNRY:
         case _QWRTZ:
-            oled_write_P(PSTR("Base\n"), false);
+            oled_write_ln_P(PSTR("Base"), false);
             break;
         case _SYMBLS:
-            oled_write_P(PSTR("Symbl\n"), false);
+            oled_write_ln_P(PSTR("Symbol"), false);
             break;
         case _NMPD:
-            oled_write_P(PSTR("Nmpd\n"), false);
+            oled_write_ln_P(PSTR("Numpad"), false);
             break;
         case _NVGTN:
-            oled_write_P(PSTR("Nvgtn\n"), false);
+            oled_write_ln_P(PSTR("Navigation"), false);
+            break;
+        case _STP:
+            oled_write_ln_P(PSTR("Setup"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("Undef"), false);
+            oled_write_ln_P(PSTR("???"), false);
     }
 };
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_set_cursor(0, 5);
-        print_status_narrow();
+        print_layer();
+    } else {
+        oled_write_P(PSTR("WPM: "), false);
+        oled_write_ln_P(PSTR(get_u8_str(get_current_wpm(), '0')), false);
     }
-
     return false;
 };
 

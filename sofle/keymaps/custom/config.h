@@ -1,6 +1,7 @@
 #pragma once
 
 #define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_WPM_ENABLE
 #define DYNAMIC_KEYMAP_LAYER_COUNT 10
 #define TAPPING_TERM 220
 
