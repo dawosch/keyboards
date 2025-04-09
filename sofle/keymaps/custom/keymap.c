@@ -16,23 +16,23 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_CNRY] = LAYOUT(
         KC_ESC, DE_1, DE_2, DE_3, DE_4, DE_5,                                           DE_6, DE_7, DE_8, DE_9, DE_0, KC_BSPC,
-        KC_TAB, DE_W, DE_L, DE_Y, DE_P, DE_B,                                           DE_Z, DE_F, DE_O, DE_U, DE_ODIA, DE_ADIA,
-        KC_LSFT, DE_C, DE_R, DE_S, DE_T, DE_G,                                          DE_M, DE_N, DE_E, DE_I, DE_A, DE_UDIA,
-        KC_LCTL, DE_Q, DE_J, DE_V, DE_D, DE_K, TG(_STP),                            DF(_QWRTZ), DE_X, DE_H, DE_SS, DE_COMM, DE_DOT, KC_RSFT,
+        KC_TAB, DE_W, DE_L, DE_Y, DE_P, DE_B,                                           DE_Z, DE_F, DE_O, DE_U, DE_ODIA, DE_UDIA,
+        KC_LSFT, DE_C, DE_R, DE_S, DE_T, DE_G,                                          DE_M, DE_N, DE_E, DE_I, DE_A, DE_ADIA,
+        KC_LCTL, DE_Q, DE_J, DE_V, DE_D, DE_K, TG(_STP),                            DF(_QWRTZ), DE_X, DE_H, DE_SS, DE_COMM, DE_DOT, KC_RALT,
                 KC_LALT, KC_LGUI, MO(_NVGTN), MO(_NMPD), LCTL_T(KC_SPC),            KC_ENT, MO(_SYMBLS), KC_NO, KC_NO, KC_NO),
 
     [_QWRTZ] = LAYOUT(
         KC_ESC, DE_1, DE_2, DE_3, DE_4, DE_5,                                           DE_6, DE_7, DE_8, DE_9, DE_0, KC_BSPC,
         KC_TAB, DE_Q, DE_W, DE_E, DE_R, DE_T,                                           DE_Z, DE_U, DE_I, DE_O, DE_P, DE_UDIA,
         KC_LSFT, DE_A, DE_S, DE_D, DE_F, DE_G,                                          DE_H, DE_J, DE_K, DE_L, DE_ODIA, DE_ADIA,
-        KC_LCTL, DE_Y, DE_X, DE_C, DE_V, DE_B, TG(_STP),                            DF(_CNRY), DE_N, DE_M, DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
+        KC_LCTL, DE_Y, DE_X, DE_C, DE_V, DE_B, TG(_STP),                            DF(_CNRY), DE_N, DE_M, DE_COMM, DE_DOT, DE_MINS, KC_RALT,
                 KC_LALT, KC_LGUI, MO(_NVGTN), MO(_NMPD), LCTL_T(KC_SPC),            KC_ENT, MO(_SYMBLS), KC_NO, KC_NO, KC_NO),
 
     [_SYMBLS] = LAYOUT(
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_NO, KC_HOME, KC_PGUP, KC_PGDN, KC_END, KC_TRNS,
         KC_TRNS, DE_DQUO, DE_AMPR, DE_SCLN, DE_QUOT, DE_COLN,                           DE_LABK, DE_LPRN, DE_LBRC, DE_LCBR, DE_PERC, KC_NO,
         KC_TRNS, DE_EXLM, KC_PMNS, KC_PPLS, DE_EQL, KC_NUHS,                            DE_RABK, DE_RPRN, DE_RBRC, DE_RCBR, DE_QUES, KC_NO,
-        KC_TRNS, DE_CIRC, DE_SLSH, DE_ASTR, KC_BSLS, KC_NO, KC_NO,                  KC_NO, DE_TILD, DE_DLR, DE_PIPE, DE_GRV, KC_AT, KC_NO,
+        KC_TRNS, DE_CIRC, DE_SLSH, DE_ASTR, KC_BSLS, KC_NO, KC_NO,                  KC_NO, DE_TILD, DE_DLR, DE_PIPE, DE_GRV, DE_AT, KC_NO,
                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
     [_NMPD] = LAYOUT(
