@@ -1,0 +1,145 @@
+meta:
+  engine: 4.1.0
+  version: 0.0.0
+  author: Dawosch
+units:
+  $default_width: cx
+  $default_height: cy
+  kx: cx
+  ky: cy
+  px: kx + 4
+  py: ky + 4
+points:
+  key:
+    padding: ky + 2
+  zones:
+    matrix:
+      key:
+        spread: kx + 2
+      anchor:
+        shift: [100, -100]
+      columns:
+        outer:
+          rows.top.skip: true
+          key:
+            splay: 10
+        pinky:
+        ring:
+          key:
+            stagger: .25ky
+            splay: -5
+        middle:
+          key:
+            stagger: .5ky
+            splay: -5
+        index:
+          key:
+            stagger: -.25ky
+        inner:
+          key:
+            stagger: -.25ky
+      rows:
+        bottom:
+        main:
+        top:
+    thumb:
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [0, -1.3ky]
+      key:
+        spread: 1.2kx
+        splay: -20
+      columns:
+        thumb1:
+          key:
+            # splay: -10
+        thumb2:
+          key:
+            width: 1kx
+        thumb3:
+          key:
+            # splay: -10
+      rows:
+        thumb:
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [kx + 6, ky + 6]
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        - ref: matrix_pinky_top
+          shift: [-.5px, .5py]
+        - ref: matrix_middle_top
+          shift: [-.5px, .5py]
+        - ref: matrix_index_top
+          shift: [.5px, .5py]
+        - ref: matrix_inner_top
+          shift: [20 + .5px, .5py]
+        - ref: matrix_inner_bottom
+          shift: [20 + .5px, 0]
+        - ref: thumb_thumb3_thumb
+          shift: [.5px, .5py]
+        - ref: thumb_thumb3_thumb
+          shift: [.5px, -.5py]
+        - ref: thumb_thumb1_thumb
+          shift: [-.5px, -.5py]
+        # - ref: matrix_index_bottom
+        #   shift: [-.5px, -.5py]
+        # - ref: matrix_ring_bottom
+        #   shift: [-.5px, -.5py]
+        - ref: matrix_pinky_bottom
+          shift: [.5px, -.5py]
+        - ref: matrix_outer_bottom
+          shift: [-.5px, -.5py]
+        - ref: matrix_outer_main
+          shift: [-.5px, .5py]
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
+pcbs:
+  pcb:
+    template: kicad8
+    outlines:
+      main:
+        outline: combo
+    footprints:
+      choc_hotswap:
+        what: ceoloide/switch_choc_v1_v2
+        where: true
+        params:
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      mcu:
+        what: ceoloide/mcu_nice_nano
+        where:
+          ref: matrix_inner_top
+          shift: [20, -8.5]
+      rst:
+        what: ceoloide/reset_switch_tht_top
+        where:
+          ref: matrix_inner_bottom
+          rotate: 90
+          shift: [20, 5]
+      power:
+        what: ceoloide/power_switch_smd_side
+        where:
+          ref: matrix_inner_bottom
+          shift: [27.5, 5]
+cases:
