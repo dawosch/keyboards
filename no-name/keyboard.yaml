@@ -1,0 +1,59 @@
+meta:
+  engine: 4.1.0
+  version: 0.0.0
+  author: Dawosch
+units:
+  kx: cx
+  ky: cy
+points:
+  zones:
+    matrix:
+      columns:
+        outer:
+          rows.top.skip: true
+          key:
+            splay: 10
+        pinky:
+        ring:
+          key:
+            stagger: .25ky
+            spread: 1.1kx
+            splay: -5
+        middle:
+          key:
+            stagger: .5ky
+            splay: -5
+            spread: 1.1kx
+        index:
+          key:
+            stagger: -.25ky
+        inner:
+          key:
+            stagger: -.25ky
+      rows:
+        bottom:
+        main:
+        top:
+    thumb:
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [0, -1.3ky]
+      key:
+        spread: 1.2kx
+        splay: -15
+      columns:
+        thumb1:
+          key:
+            # splay: -10
+        thumb2:
+          key:
+            width: 1.5kx
+            rotate: 90
+        thumb3:
+          key:
+            # splay: -10
+      rows:
+        thumb:
+outlines:
+pcbs:
+cases:
