@@ -3,6 +3,8 @@ meta:
   version: 0.0.0
   author: Dawosch
 units:
+  $default_width: cx
+  $default_height: cy
   kx: cx
   ky: cy
   px: kx + 2
@@ -59,5 +61,44 @@ points:
       rows:
         thumb:
 outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [kx + 6, ky + 6]
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_pinky_top
+          shift: [-.5kx, .5ky]
+        - ref: matrix_middle_top
+          shift: [-.5kx, .5ky]
+        - ref: matrix_index_top
+          shift: [.5kx, .5ky]
+        - ref: matrix_inner_top
+          shift: [.5kx, .5ky]
+        - ref: matrix_inner_bottom
+          shift: [.5kx, 0]
+        - ref: thumb_thumb3_thumb
+          shift: [.5kx, .5ky]
+        - ref: thumb_thumb3_thumb
+          shift: [.5kx, -.5ky]
+        - ref: thumb_thumb1_thumb
+          shift: [-.5kx, -.5ky]
+        - ref: matrix_index_bottom
+          shift: [-.5kx, -.5ky]
+        # - ref: matrix_ring_bottom
+        #   shift: [-.5kx, -.5ky]
+        # - ref: matrix_pinky_bottom
+        #   shift: [.5kx, -.5ky]
+        - ref: matrix_outer_bottom
+          shift: [-.5kx, -.5ky]
+        - ref: matrix_outer_main
+          shift: [-.5kx, .5ky]
+        
 pcbs:
 cases:
