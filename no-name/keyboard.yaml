@@ -5,9 +5,15 @@ meta:
 units:
   kx: cx
   ky: cy
+  px: kx + 2
+  py: ky + 2
 points:
+  key:
+    padding: py
   zones:
     matrix:
+      key:
+        spread: px
       columns:
         outer:
           rows.top.skip: true
@@ -17,13 +23,11 @@ points:
         ring:
           key:
             stagger: .25ky
-            spread: 1.1kx
             splay: -5
         middle:
           key:
             stagger: .5ky
             splay: -5
-            spread: 1.1kx
         index:
           key:
             stagger: -.25ky
