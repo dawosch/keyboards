@@ -7,15 +7,17 @@ units:
   $default_height: cy
   kx: cx
   ky: cy
-  px: kx + 2
-  py: ky + 2
+  px: kx + 4
+  py: ky + 4
 points:
   key:
-    padding: py
+    padding: ky + 2
   zones:
     matrix:
       key:
-        spread: px
+        spread: kx + 2
+      anchor:
+        shift: [100, -100]
       columns:
         outer:
           rows.top.skip: true
@@ -72,33 +74,59 @@ outlines:
   board:
     - what: polygon
       operation: stack
+      fillet: 2
       points:
         - ref: matrix_pinky_top
-          shift: [-.5kx, .5ky]
+          shift: [-.5px, .5py]
         - ref: matrix_middle_top
-          shift: [-.5kx, .5ky]
+          shift: [-.5px, .5py]
         - ref: matrix_index_top
-          shift: [.5kx, .5ky]
+          shift: [.5px, .5py]
         - ref: matrix_inner_top
-          shift: [.5kx, .5ky]
+          shift: [.5px, .5py]
         - ref: matrix_inner_bottom
-          shift: [.5kx, 0]
+          shift: [.5px, 0]
         - ref: thumb_thumb3_thumb
-          shift: [.5kx, .5ky]
+          shift: [.5px, .5py]
         - ref: thumb_thumb3_thumb
-          shift: [.5kx, -.5ky]
+          shift: [.5px, -.5py]
         - ref: thumb_thumb1_thumb
-          shift: [-.5kx, -.5ky]
-        - ref: matrix_index_bottom
-          shift: [-.5kx, -.5ky]
+          shift: [-.5px, -.5py]
+        # - ref: matrix_index_bottom
+        #   shift: [-.5px, -.5py]
         # - ref: matrix_ring_bottom
-        #   shift: [-.5kx, -.5ky]
-        # - ref: matrix_pinky_bottom
-        #   shift: [.5kx, -.5ky]
+        #   shift: [-.5px, -.5py]
+        - ref: matrix_pinky_bottom
+          shift: [.5px, -.5py]
         - ref: matrix_outer_bottom
-          shift: [-.5kx, -.5ky]
+          shift: [-.5px, -.5py]
         - ref: matrix_outer_main
-          shift: [-.5kx, .5ky]
-        
+          shift: [-.5px, .5py]
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
 pcbs:
+  pcb:
+    outlines:
+      main:
+        outline: board
+    footprints:
+      choc_hotswap:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: true
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
 cases:
