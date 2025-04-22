@@ -18,7 +18,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC, DE_1, DE_2, DE_3, DE_4, DE_5,                                           DE_6, DE_7, DE_8, DE_9, DE_0, KC_BSPC,
         KC_TAB, DE_W, DE_L, DE_Y, DE_P, DE_B,                                           DE_Z, DE_F, DE_O, DE_U, DE_ODIA, DE_UDIA,
         KC_LSFT, DE_C, DE_R, DE_S, DE_T, DE_G,                                          DE_M, DE_N, DE_E, DE_I, DE_A, DE_ADIA,
-        KC_LCTL, DE_Q, DE_J, DE_V, DE_D, DE_K, TG(_STP),                            DF(_QWRTZ), DE_X, DE_H, DE_SS, DE_COMM, DE_DOT, KC_RALT,
+        KC_LALT, DE_Q, DE_J, DE_V, DE_D, DE_K, TG(_STP),                            DF(_QWRTZ), DE_X, DE_H, DE_SS, DE_COMM, DE_DOT, KC_RALT,
                 KC_LALT, KC_LGUI, MO(_NVGTN), MO(_NMPD), LCTL_T(KC_SPC),            KC_ENT, MO(_SYMBLS), KC_NO, KC_NO, KC_NO),
 
     [_QWRTZ] = LAYOUT(
@@ -44,9 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NVGTN] = LAYOUT(
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_NO, KC_NO, KC_UP, KC_NO, KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_NO, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                       KC_PGUP, KC_HOME, KC_UP, KC_END, KC_NO, KC_NO,
+        KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO, KC_NO,
+        KC_LALT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
     [_STP] = LAYOUT(
