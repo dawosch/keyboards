@@ -1,0 +1,39 @@
+name: Build Keyboard Config
+on: [workflow_dispatch, push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v5
+
+      - name: Update system
+        run: sudo apt update
+
+      - name: Install dependencies
+        run: sudo apt install -y git python3-pip
+
+      - name: Install QMK
+        run: python3 -m pip install --user qmk
+
+      - name: Setup QMK
+        run: qmk setup -y
+
+      - name: Copy keyboard to qmk
+        run: sudo cp -R sofle/keymaps/custom /home/runner/qmk_firmware/keyboards/sofle/keymaps
+
+      - name: Build firmware
+        run: qmk compile -kb sofle/rev1 -km custom -e CONVERT_TO=rp2040_ce -c
+        
+      - name: Create keymap
+        run: qmk c2json -km custom -kb sofle --no-cpp -o /home/runner/qmk_firmware/.build/keymap.json
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ GITHUB.REF_NAME }}
+          files: |
+            /home/runner/qmk_firmware/.build/keymap.json
+            /home/runner/qmk_firmware/.build/sofle_rev1_custom_rp2040_ce.uf2
