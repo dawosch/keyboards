@@ -16,7 +16,7 @@ jobs:
         run: sudo apt install -y git python3-pip
 
       - name: Install QMK
-        run: python3 -m pip install --user qmk
+        run: python3 -m pip install --user qmk -r ~/qmk_firmware/requirements.txt
 
       - name: Setup QMK
         run: qmk setup -y
